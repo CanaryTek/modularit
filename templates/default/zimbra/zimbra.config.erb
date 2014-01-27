@@ -1,0 +1,81 @@
+VDOMAIN=<%= @hostname %>
+AVUSER=admin@<%= @hostname %>
+CREATEADMIN=admin@<%= @hostname %>
+CREATEDOMAIN=<%= @hostname %>
+DOCREATEADMIN=yes
+DOCREATEDOMAIN=yes
+DOTRAINSA=yes
+EXPANDMENU=no
+HOSTNAME=<%= @hostname %>
+HTTPPORT=80
+HTTPPROXY=FALSE
+HTTPPROXYPORT=8080
+HTTPSPORT=443
+HTTPSPROXYPORT=8443
+IMAPPORT=143
+IMAPPROXYPORT=7143
+IMAPSSLPORT=993
+IMAPSSLPROXYPORT=7993
+JAVAHOME=/opt/zimbra/java
+LDAPBESSEARCHSET=set
+LDAPHOST=<%= @hostname %>
+LDAPPORT=389
+LDAPREPLICATIONTYPE=master
+LDAPSERVERID=2
+MAILBOXDMEMORY=947
+MAILPROXY=FALSE
+MODE=https
+MTAAUTHHOST=<%= @hostname %>
+MYSQLMEMORYPERCENT=30
+POPPORT=110
+POPPROXYPORT=7110
+POPSSLPORT=995
+POPSSLPROXYPORT=7995
+PROXYMODE=https
+REMOVE=no
+RUNARCHIVING=no
+RUNAV=yes
+RUNSA=yes
+RUNVMHA=no
+SMTPDEST=admin@<%= @hostname %>
+SMTPHOST=<%= @hostname %>
+SMTPNOTIFY=yes
+SMTPSOURCE=admin@<%= @hostname %>
+SNMPNOTIFY=yes
+SNMPTRAPHOST=<%= @hostname %>
+SPELLURL=http://<%= @hostname -%>:7780/aspell.php
+STARTSERVERS=yes
+SYSTEMMEMORY=3.7
+TRAINSAHAM=ham.7neifbzc@<%= @hostname %>
+TRAINSASPAM=spam.a8kguw7a@<%= @hostname %>
+UPGRADE=yes
+USESPELL=yes
+VERSIONUPDATECHECKS=TRUE
+VIRUSQUARANTINE=virus-quarantine.e_0lfsgtb@<%= @hostname %>
+ZIMBRA_REQ_SECURITY=yes
+ldap_bes_searcher_password=0aT7dOvb
+ldap_dit_base_dn_config=cn=zimbra
+ldap_nginx_password=0aT7dOvb
+mailboxd_directory=/opt/zimbra/mailboxd
+mailboxd_keystore=/opt/zimbra/mailboxd/etc/keystore
+mailboxd_keystore_password=mYHBaqDCvB
+mailboxd_server=jetty
+mailboxd_truststore=/opt/zimbra/java/jre/lib/security/cacerts
+mailboxd_truststore_password=changeit
+postfix_mail_owner=postfix
+postfix_setgid_group=postdrop
+zimbraClusterType=none
+zimbraFeatureBriefcasesEnabled=Disabled
+zimbraFeatureTasksEnabled=Enabled
+zimbraIPMode=ipv4
+zimbraMailProxy=FALSE
+zimbraMtaMyNetworks=127.0.0.0/8 172.27.1.0/24 [::1]/128 [fe80::]/64
+zimbraPrefTimeZoneId=America/Los_Angeles
+zimbraReverseProxyLookupTarget=TRUE
+zimbraVersionCheckNotificationEmail=admin@<%= @hostname %>
+zimbraVersionCheckNotificationEmailFrom=admin@<%= @hostname %>
+zimbraVersionCheckSendNotifications=TRUE
+zimbraWebProxy=FALSE
+zimbra_ldap_userdn=uid=zimbra,cn=admins,cn=zimbra
+zimbra_require_interprocess_security=1
+INSTALL_PACKAGES="zimbra-apache zimbra-core zimbra-ldap zimbra-logger zimbra-mta zimbra-snmp zimbra-spell zimbra-store "

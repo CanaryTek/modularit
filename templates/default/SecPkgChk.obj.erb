@@ -1,0 +1,36 @@
+sshd:
+  :package: openssh-server
+  :ports: [ TCP/22 ]
+ntpd:
+  :package: ntp
+  :ports: [ UDP/123 ]
+dnsmasq:
+  :package: dnsmasq
+  :ports: [ UDP/67, UDP/53, TCP/53 ]
+dhcpd:
+  :package: dhcp
+  :ports: [ UDP/67 ]
+named:
+  :package: bind
+  :ports: [ UDP/53, TCP/53, TCP/953, UDP/1024:65535 ]
+zabbix_ag:
+  :package: zabbix-agent
+  :ports: [ TCP/10050 ]
+zabbix_pr:
+  :package: zabbix-agent
+  :ports: [ TCP/10051 ]
+avahi-dae:
+  :package: avahi
+  :ports: [ UDP/5353, UDP/ANY ]
+portmap:
+  :package: portmap
+  :ports: [ UDP/111, TCP/111 ]
+rpcbind:
+  :package: rpcbind
+  :ports: [ UDP/ANY, TCP/111 ]
+rpc.statd:
+  :package: nfs-utils
+  :ports: [ UDP/ANY, TCP/ANY ]
+dhclient:
+  :package: dhclient
+  :ports: [ UDP/68 ]
