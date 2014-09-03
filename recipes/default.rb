@@ -15,6 +15,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Initialize names
+node.set['rasca']['node_name']=Chef::Config[:node_name]
+node.set['nagios_name']=Chef::Config[:node_name]
+
 ## Disable update-motd on amazon
 if node['platform'] == "amazon"
   execute "disable-update-motd" do
@@ -34,10 +38,8 @@ EOF
   mode "0644"
 end
 
-##
-## YUM Repos
-##
-include_recipe "yum::epel"
+# Setup needed repos
+include_recipe 'modularit::repos'
 
 ##
 ## Rasca
@@ -126,41 +128,5 @@ if node.run_list.roles.include?("dirvish_client")
   rasca_check "BackupChk" do
     priority "Urgent"
   end
-end
-
-##
-## FIXME: Delete when all hosts are in chef
-##
-# Remove puppet
-service "puppetd" do
-  action [ :stop, :disable ]
-end
-package "puppet" do
-  action :remove
-end
-file "/var/lib/modularit/obj/ProcChk/puppet.obj" do
-  action :delete
-end
-file "/var/lib/modularit/alarms/Urgent/Puppet-picacaller" do
-  action :delete
-end
-file "/etc/cron.d/pifia" do
-  action :delete
-end
-file "/etc/cron.d/rasca" do
-  action :delete
-end
-
-# Eliminar rubygem-json por los problemas del simbolos, ahora usamos json_pure
-package "rubygem-json" do
-  action :remove
-end
-
-# Rename /var/lib/modularit/obj/CheckDuplicity to /var/lib/modularit/obj/backup
-bash "rename-CheckDuplicity_obj" do
-  code <<-EOH
-    [ -d /var/lib/modularit/obj/CheckDuplicity ] && mv /var/lib/modularit/obj/{CheckDuplicity,backup}
-  EOH
-  creates "/var/lib/modularit/obj/backup"
 end
 

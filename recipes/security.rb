@@ -22,14 +22,4 @@
   end
 end
 ## Obj files
-rasca_object "SecPassChk" do
-  check "SecPassChk"
-  content <<EOF
-# Run alert with option --info to see the format
-:banned_passwd: [ "passwd.root", "weuchp", "qclp,t", "euchp" ]
-EOF
-end
-rasca_object "SecPkgChk" do
-  check "SecPkgChk"
-end
 
