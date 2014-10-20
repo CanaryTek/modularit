@@ -44,4 +44,3 @@ template "/etc/tripwire/twcfg.txt" do
   mode 00644
   action :create
 end
-

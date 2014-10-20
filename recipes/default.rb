@@ -81,11 +81,14 @@ end
 ## Security Checks
 ##
 unless node.run_list.roles.include?("not_exposed")
-  include_recipe "modularit::tripwire"
-  include_recipe "modularit::security"
-  unless node.run_list.roles.include?("not_ssh_exposed")
-    include_recipe "modularit::denyhosts"
+  # epel7 has no tripwire package
+  unless node['platform_family'] == "rhel" and node['platform_version'].to_i >= 7
+    include_recipe "modularit::tripwire"
+    unless node.run_list.roles.include?("not_ssh_exposed")
+      include_recipe "modularit::denyhosts"
+    end
   end
+  include_recipe "modularit::security"
 end
 
 ##
@@ -99,11 +102,14 @@ unless node['virtualization']['system']=='xen' and node['virtualization']['role'
 end
 
 ##
-## Basckups
+## Backups
 ##
 unless node.run_list.roles.include?("not_backup")
-  include_recipe "modularit::backup"
+  unless node['platform_family'] == "rhel" and node['platform_version'].to_i >= 7
+    include_recipe "modularit::backup"
+  end
 end
+
 # New modularit-backup cookbook
 include_recipe "modularit-backup::git_client"
 
