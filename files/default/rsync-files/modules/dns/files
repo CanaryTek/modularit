@@ -1,0 +1,3 @@
+/etc/named.conf:/etc
+/etc/named/:/etc/named
+/var/named/:/var/named

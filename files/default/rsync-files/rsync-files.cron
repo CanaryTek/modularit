@@ -1,0 +1,3 @@
+# Sync files
+*/5 * * * * root /etc/rsync-files/rsync-files.sh
+
