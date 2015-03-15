@@ -81,13 +81,13 @@ end
 ## Security Checks
 ##
 unless node.run_list.roles.include?("not_exposed")
-  # epel7 has no tripwire package
+  # epel7 has no denyhosts package
   unless node['platform_family'] == "rhel" and node['platform_version'].to_i >= 7
-    include_recipe "modularit::tripwire"
     unless node.run_list.roles.include?("not_ssh_exposed")
       include_recipe "modularit::denyhosts"
     end
   end
+  include_recipe "modularit::tripwire"
   include_recipe "modularit::security"
 end
 
@@ -107,6 +107,17 @@ end
 unless node.run_list.roles.include?("not_backup")
   unless node['platform_family'] == "rhel" and node['platform_version'].to_i >= 7
     include_recipe "modularit::backup"
+  end
+end
+
+if node['virtualization']['role'] == "host" and (node['virtualization']['system']=="xen" or node['virtualization']['system']=="kvm")
+  # ohai plugin to export virsh data
+  cookbook_file "#{node['chef_packages']['ohai']['ohai_root']}/plugins/virsh.rb" do
+    source "virsh.rb"
+    owner "root"
+    group "root"
+    mode 00755
+    action :create
   end
 end
 
@@ -135,4 +146,6 @@ if node.run_list.roles.include?("dirvish_client")
     priority "Urgent"
   end
 end
+
+
 
