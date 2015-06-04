@@ -1,5 +1,15 @@
 # Repos for ModularIT
 
+# Fix yum cookbook broken epel key
+if node['platform_version'].to_i >= 7
+  node.set['yum']['epel']['key'] = "RPM-GPG-KEY-EPEL-7"
+  node.set['yum']['epel']['key_url'] = "http://download.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7"
+elsif node['platform_version'].to_i >= 6
+  node.set['yum']['epel']['key'] = "RPM-GPG-KEY-EPEL-6"
+else
+  node.set['yum']['epel']['key'] = "RPM-GPG-KEY-EPEL"
+end
+
 # EPEL
 include_recipe "yum::epel"
 

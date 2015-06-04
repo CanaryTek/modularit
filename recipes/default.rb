@@ -122,7 +122,7 @@ if node['virtualization']['role'] == "host" and (node['virtualization']['system'
 end
 
 # New modularit-backup cookbook
-include_recipe "modularit-backup::git_client"
+#include_recipe "modularit-backup::git_client"
 
 ##
 ## Add recipes based on node's roles

@@ -68,7 +68,7 @@ end
 cron "rascaBackup-full" do
   hour "00"
   minute "01"
-  weekday "6"
+  weekday "7"
   command '/bin/bash -l -c "/usr/bin/rascaBackup -r full --all && /usr/bin/rascaBackup -r remove_old --all && /usr/bin/rascaBackup -r cleanup --all"'
 end
 
