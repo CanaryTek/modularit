@@ -1,5 +1,7 @@
 # Repos for ModularIT
 
+unless node['platform_family'] == "debian"
+
 # Fix yum cookbook broken epel key
 if node['platform_version'].to_i >= 7
   node.set['yum']['epel']['key'] = "RPM-GPG-KEY-EPEL-7"
@@ -27,3 +29,4 @@ yum_repository "modularit" do
   action :add
 end
 
+end

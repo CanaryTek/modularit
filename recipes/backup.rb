@@ -37,6 +37,7 @@ directory "/root/bin" do
   action :create
 end
 file "/root/bin/backup.sh" do
+  action :delete
   content <<EOF
 #!/bin/bash
 export HOME=/root
@@ -62,14 +63,14 @@ cron "rascaBackup-inc" do
   hour "00"
   minute "01"
   weekday "1-5"
-  command '/bin/bash -l -c "/usr/bin/rascaBackup -r inc --all && /usr/bin/rascaBackup -r remove_old --all && /usr/bin/rascaBackup -r cleanup --all"'
+  command '/bin/bash -l -c "rascaBackup -r inc --all && rascaBackup -r remove_old --all && rascaBackup -r cleanup --all" > /dev/null 2>&1'
 end
 # Full on saturday
 cron "rascaBackup-full" do
   hour "00"
   minute "01"
   weekday "7"
-  command '/bin/bash -l -c "/usr/bin/rascaBackup -r full --all && /usr/bin/rascaBackup -r remove_old --all && /usr/bin/rascaBackup -r cleanup --all"'
+  command '/bin/bash -l -c "rascaBackup -r full --all && rascaBackup -r remove_old --all && rascaBackup -r cleanup --all" > /dev/null 2>&1'
 end
 
 ## FIXME: Maybe this should be in cookbook rasca instead
