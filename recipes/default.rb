@@ -105,9 +105,7 @@ end
 ## Backups
 ##
 unless node.run_list.roles.include?("not_backup")
-  unless node['platform_family'] == "rhel" and node['platform_version'].to_i >= 7
     include_recipe "modularit::backup"
-  end
 end
 
 if node['virtualization']['role'] == "host" and (node['virtualization']['system']=="xen" or node['virtualization']['system']=="kvm")
