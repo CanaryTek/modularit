@@ -1,6 +1,6 @@
 # Repos for ModularIT
 
-unless node['platform_family'] == "debian"
+if node['platform_family'] == "rhel" or node['platform_family'] == "fedora"
 
 # Fix yum cookbook broken epel key
 if node['platform_version'].to_i >= 7
@@ -13,18 +13,18 @@ else
 end
 
 # EPEL
-include_recipe "yum::epel"
+# EPEL uses https wich may require an updated ca-certificates package
+package "ca-certificates" do
+  action :upgrade
+end
+include_recipe "yum-epel"
 
 # ModularIT repo
-yum_key "RPM-GPG-KEY-CanaryTek" do
-  url "http://ftp.modularit.org/repos/RPM-GPG-KEY-CanaryTek"
-  action :add
-end
 yum_repository "modularit" do
   description "ModularIT repo for RHEL/CentOS"
   url "http://ftp.modularit.org/repos/centos/$releasever/$basearch/"
-  #key "RPM-GPG-KEY-CanaryTek"
-  enabled "1"
+  gpgkey "http://ftp.modularit.org/repos/RPM-GPG-KEY-CanaryTek"
+  enabled true
   priority "5"
   action :add
 end

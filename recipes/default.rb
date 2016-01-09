@@ -97,8 +97,8 @@ end
 # Xen guests does not need NTP because it uses the host's clock
 unless node['virtualization']['system']=='xen' and node['virtualization']['role']=='guest'
   include_recipe "ntp"
-  # FIXME: ntp::ntpdate does not work with centos
-  include_recipe "ntp::ntpdate"
+  # FIXME: activar clock_sync para lanzar ntpdate (ver attributes del cookbook)
+  #include_recipe "ntp::ntpdate"
 end
 
 ##
