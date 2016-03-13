@@ -1,6 +1,6 @@
 # Repos for ModularIT
 
-if node['platform_family'] == "rhel" or node['platform_family'] == "fedora"
+if node['platform'] == "centos" or node['platform'] == "rhel"
 
 # Fix yum cookbook broken epel key
 if node['platform_version'].to_i >= 7
@@ -14,8 +14,10 @@ end
 
 # EPEL
 # EPEL uses https wich may require an updated ca-certificates package
+if node['platform_version'].to_i >= 6
 package "ca-certificates" do
   action :upgrade
+end
 end
 include_recipe "yum-epel"
 

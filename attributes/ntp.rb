@@ -10,6 +10,10 @@ case node[:platform_family]
   when "suse"
     default['ntp']['packages'] = %w(ntp)
   when "rhel","fedora"
-    default['ntp']['packages'] = %w(ntp ntpdate)
+    if node['platform_version'].to_i >= 6
+      default['ntp']['packages'] = %w(ntp ntpdate)
+    else
+      default['ntp']['packages'] = %w(ntp)
+    end
 end
 

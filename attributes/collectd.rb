@@ -6,7 +6,7 @@ case node[:platform]
     default['collectd']['packages'] = [ "collectd" ]
     default['collectd']['services'] = [ "collectd" ]
   when "centos", "amazon", "redhat"
-    default['collectd']['packages'] = [ "collectd" ]
+    default['collectd']['packages'] = [ "collectd", "collectd-rrdtool" ]
     default['collectd']['services'] = [ "collectd" ]
 end
 
