@@ -105,7 +105,7 @@ end
 ## Backups
 ##
 unless node.run_list.roles.include?("not_backup")
-    include_recipe "modularit::backup"
+    include_recipe "modularit-backup::client"
 end
 
 if node['virtualization']['role'] == "host" and (node['virtualization']['system']=="xen" or node['virtualization']['system']=="kvm")
