@@ -95,7 +95,7 @@ end
 ## NTP
 ##
 # Xen guests does not need NTP because it uses the host's clock
-unless node['virtualization']['system']=='xen' and node['virtualization']['role']=='guest'
+unless node['virtualization']['system']=='xen' and node['virtualization']['role']=='guest' and node['ntp']['skip']=='true'
   include_recipe "ntp"
   # FIXME: activar clock_sync para lanzar ntpdate (ver attributes del cookbook)
   #include_recipe "ntp::ntpdate"

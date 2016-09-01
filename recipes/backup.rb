@@ -16,7 +16,7 @@
 # limitations under the License.
 
 ## Needed packages
-[ "duplicity","python-paramiko"].each do |pkg|
+[ "duplicity","python-paramiko","safekeep-client"].each do |pkg|
   package pkg
 end
 
@@ -48,6 +48,33 @@ export HOME=/root
 EOF
   mode "0755"
 end
+
+file "/usr/sbin/safekeep-client-script.sh" do
+  action :create
+  content <<EOF
+#! /bin/sh
+#
+# Safekeep client script
+# API:	$1 = Step, $2 = Safekeep ID, $3 = Backup Root Directory
+
+case $1 in
+'STARTUP') ;;
+'PRE-SETUP') ;;
+'POST-SETUP') ;;
+'POST-BACKUP')
+    logger "safekeep: Backup OK"
+    touch /var/lib/modularit/data/lastbackups/safekeep
+    ;;
+'POST-SCRUB') ;;
+esac
+
+exit 0
+
+EOF
+  mode "0755"
+end
+
+
 
 ## Backup cron
 # Remove old cron

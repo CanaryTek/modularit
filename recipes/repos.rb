@@ -23,9 +23,10 @@ include_recipe "yum-epel"
 
 # ModularIT repo
 yum_repository "modularit" do
-  description "ModularIT repo for RHEL/CentOS"
-  url "http://ftp.modularit.org/repos/centos/$releasever/$basearch/"
-  gpgkey "http://ftp.modularit.org/repos/RPM-GPG-KEY-CanaryTek"
+  description "ModularIT additional packages"
+  #type "rpm-md"
+  url "http://download.opensuse.org/repositories/home:/kuko:/ModularIT/CentOS_$releasever"
+  gpgkey "http://download.opensuse.org/repositories/home:/kuko:/ModularIT/CentOS_$releasever//repodata/repomd.xml.key"
   enabled true
   priority "5"
   action :add
